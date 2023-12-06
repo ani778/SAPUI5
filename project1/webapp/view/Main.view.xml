@@ -1,0 +1,20 @@
+<mvc:View xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:sf="sap.ui.comp.smartfield"
+	xmlns:l="sap.ui.layout"
+	xmlns:form="sap.ui.comp.smartform"
+	xmlns:m="sap.m" height="100%" controllerName="project1.controller.Main">
+	<m:ScrollContainer id="SC1" height="100%" horizontal="false" vertical="true">
+		<form:SmartForm id="SF1" class="editableForm" editTogglable="true" editable="true" title="{Name}" binding="{/Products('1239102')}">
+			<form:Group id="G1" label="Product">
+				<form:GroupElement id="GE-ProductId">
+					<sf:SmartField id="idProductId" value="{ProductId}"/>
+				</form:GroupElement>
+				<form:GroupElement id="GE-Name">
+					<sf:SmartField id="idName" value="{Name}"/>
+				</form:GroupElement>
+			</form:Group>
+		</form:SmartForm>
+		<core:InvisibleText id="descriptionNodeId" text="Additional input description refferenced by aria-describedby." />
+	</m:ScrollContainer>
+</mvc:View>

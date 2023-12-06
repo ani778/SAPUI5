@@ -1,0 +1,71 @@
+<mvc:View
+	controllerName="project1.controller.Table"
+	xmlns:l="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:semantic="sap.f.semantic">
+		<semantic:SemanticPage
+		id="page"
+		headerPinnable="false"
+		toggleHeaderOnTitleClick="false">
+			<semantic:titleHeading>
+			<Title text="{i18n>worklistTitle}" />
+		</semantic:titleHeading>
+		<semantic:content>
+	<Table
+	    id="friendsTable"
+		width="auto"
+		items="{results>/results}"
+        noDataText="No Data"
+		class="sapUiSmallMarginBottom">
+		<headerToolbar>
+        	<Toolbar>
+			    <Label id="tableHeader" text="{path: 'results>/itemCount', formatter: '.formatInstructionsTitle'}"/>
+                  <ToolbarSpacer />
+                  <SearchField id="searchField" width="auto" search=".onFilterPosts" />
+                  <Button
+                        icon="sap-icon://add"
+                        id="helloDialogButton"
+                        press=".onOpenDialog"
+                        class="sapUiSmallMarginEnd"/>
+					<Button
+						id="sortUsersButton"
+						press=".onSort"
+						tooltip="{i18n>sortButtonText}"
+						icon="sap-icon://sort"/>
+            </Toolbar>
+		</headerToolbar>
+		<columns class="sapUiTableHeaderBG">
+			<Column>
+				<Text text="ID" />
+			</Column>
+			<Column>
+				<Text text="Instructions (short)"/>
+			</Column>
+			<Column>
+				<Text text="Last Changed By"/>
+			</Column>
+			<Column>
+				<Text text="Last Changed In"/>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem type="Active" 	press=".onPress">
+				<cells>
+					<Text text="{results>InstructionId}"/>
+				</cells>
+				<cells>
+					<Text text="{results>InstructionShort}"/>
+				</cells>
+				<cells>
+					<Text text="{results>ChUser}"/>
+				</cells>
+				<cells>
+				    <Text text="{results>ChDate}"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+	</semantic:content>
+		</semantic:SemanticPage>
+</mvc:View>

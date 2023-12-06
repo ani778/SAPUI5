@@ -1,0 +1,15 @@
+<mvc:View
+   controllerName="project1.controller.Instructions"
+   xmlns="sap.m"
+   xmlns:mvc="sap.ui.core.mvc">
+       <Toolbar>
+                  <Label id="tableHeader" text="{i18n>instructionsTitle}"/>
+                  <ToolbarSpacer />
+                  <SearchField id="searchField" width="auto" search=".onFilterPosts" />
+                  <Button
+                        icon="sap-icon://add"
+                        id="helloDialogButton"
+                        press=".onOpenDialog"
+                        class="sapUiSmallMarginEnd"/>
+    </Toolbar>              
+</mvc:View>

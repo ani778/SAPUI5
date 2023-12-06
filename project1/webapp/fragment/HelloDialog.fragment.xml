@@ -1,0 +1,70 @@
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core"
+   controllerName="project1.controller.Table"
+	xmlns:mvc="sap.ui.core.mvc"
+   xmlns:fiori="sap.ui.webc.fiori"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form">
+   <Dialog
+      id="helloDialog"
+      title="Hello {/recipient/name}">
+      	<f:Form id="FormToolbar"
+			editable="true"
+			ariaLabelledBy="Title1">
+			<f:layout>
+				<f:ResponsiveGridLayout
+					labelSpanXL="4"
+					labelSpanL="3"
+					labelSpanM="4"
+					labelSpanS="12"
+					adjustLabelSpan="false"
+					emptySpanXL="0"
+					emptySpanL="4"
+					emptySpanM="0"
+					emptySpanS="0"
+					columnsXL="2"
+					columnsL="1"
+					columnsM="1"
+					singleContainerFullSize="false" />
+			</f:layout>
+			<f:formContainers>
+				<f:FormContainer ariaLabelledBy="Title2">
+					<f:formElements>
+						<f:FormElement label="Instruction short">
+								<Input value="{/name}" id="name"/>
+						</f:FormElement>
+                  <f:FormElement label="Instruction long">
+                        <TextArea value="{/textarea}" rows="6" id="instructionTextarea"/>
+						</f:FormElement>
+						<f:FormElement label="Assigned Subproject Types">
+							<f:fields>
+                        <MultiComboBox
+							id="subprojectTypes"
+							value="{/type}"
+                        	items="{
+                              path: 'comboBox>/results',
+                              sorter: { path: 'SubprjType' }
+                           	}">
+                           <core:Item text="{comboBox>SubprjType}-{comboBox>Description}"  />
+                        </MultiComboBox>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+			</f:formContainers>
+		</f:Form>
+        <l:HorizontalLayout
+           width="100%"
+           class="sapUiContentPadding">
+               <l:content>
+                  <Button
+				  	press=".onCreate"
+                     text="{i18n>dialogCreateButtonText}"/>
+                  <Button
+                     text="{i18n>dialogCloseButtonText}"
+                     press=".onCloseDialog"/>
+               </l:content>
+            </l:HorizontalLayout>
+      </Dialog>
+</core:FragmentDefinition>
