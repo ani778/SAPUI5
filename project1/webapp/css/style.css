@@ -10,7 +10,12 @@ html[dir="ltr"] .myAppDemoWT .myCustomButton.sapMBtn {
     display: inline-block;
     font-weight: bold;
  }
- /* sapMListTblCell sapMTblCellFocusable sapMTableTH sapMListTblHeaderCell */
+
 .sapMListTblHeaderCell {
     background-color: #f5f6f7 !important;
+ }
+ 
+ #__bar0 {
+   position: fixed;
+   bottom: 0;
  }

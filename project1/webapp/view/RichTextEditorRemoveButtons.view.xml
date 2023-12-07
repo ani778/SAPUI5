@@ -2,65 +2,72 @@
 	controllerName="project1.controller.RichTextEditorRemoveButtons"
 	xmlns="sap.m"
 	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
 	xmlns:m="sap.m"
 	xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc">
 		<Page
 			id="page"
-		title="Second Page"
-		showNavButton="true"
-		navButtonPress=".onNavBack">
-		<content>
-	<l:VerticalLayout id="idVerticalLayout" class="sapUiContentPadding" width="100%">
-		<HBox alignItems="center" >
-			<Label text="Instruction ID:" labelFor="productInputWithList" />
-			<Input
-				id="productInputWithList"
-				value="{results>InstructionId}"
-				showSuggestion="true" 
-				editable="false"/>
-		</HBox>
-		<HBox alignItems="center">
-               <Label text="Instruction short: " labelFor="productInputWithList2" />
-               <Input
-                  id="productInputWithList2"
-                  value="{results>InstructionShort}"
-                  showSuggestion="true"
-				  editable="false"/>
-            </HBox>
-		<HBox  alignItems="center">
-			<m:ObjectStatus title="Last Changed On: " text="{path: 'results>ChDate', formatter: '.formatDate'}"/>
-		</HBox>
-            <HBox alignItems="center">
-               <Label text="Last Changed By: " labelFor="productInputWithList3" />
-               <Input
-                  id="productInputWithList3"
-                  value="{results>ChUser}"
-                  showSuggestion="true"
-				  editable="false"/>
-            </HBox>
-			
-	</l:VerticalLayout>
-	<HBox  alignItems="center">
-	<Label text="Assigned Subproject type: " labelFor="combobox" />
-	<MultiComboBox
-		editable="false"
-		id="combobox"
-		 items="{
-        path: '/results',
-        formatter: '.formatType',
-        sorter: { path: '__metadata/type' }
-    }">
-        <core:Item  key="{__metadata/type}" text="{__metadata/type}"  />
-	</MultiComboBox>
-	</HBox>
-	</content>
-	<Bar>
+			title="Second Page"
+			showNavButton="true"
+			navButtonPress=".onNavBack">
+			<content >
+
+			<l:BlockLayout>
+				<l:BlockLayoutRow>
+				<l:BlockLayoutCell
+					
+					backgroundColorSet="{/colorSet}"
+					backgroundColorShade="ShadeC">
+					<f:SimpleForm
+						
+						backgroundDesign="Transparent"
+						layout="ResponsiveGridLayout">
+						<Label text="Instruction ID:" labelFor="productInputWithList" />
+						<Input 
+							id="productInputWithList"
+							type="Text" 
+							value="{results>InstructionId}"
+							showSuggestion="true" 
+							editable="false"/>
+						<Label text="Instruction short: " labelFor="productInputWithList2" />
+						<Input
+							id="productInputWithList2"
+							value="{results>InstructionShort}"
+							showSuggestion="true"
+							editable="false"/>
+						<Label text="Last Changed On: " />
+						<Text text="{path: 'results>ChDate', formatter: '.formatDate'}"/>
+						<Label text="Last Changed By: " labelFor="productInputWithList3" />
+						<Input
+							id="productInputWithList3"
+							value="{results>ChUser}"
+							showSuggestion="true"
+							editable="false"/>
+						<Label text="Instruction long: " labelFor="productInputWithList3" />
+						<l:VerticalLayout id="idVerticalLayout" class="sapUiContentPadding" width="100%"/>
+						<Label text="Assigned Subproject type: " labelFor="combobox" />				
+						<MultiComboBox
+							editable="false"
+							id="combobox"
+							items="{
+								path: '/results',
+								formatter: '.formatType',
+								sorter: { path: '__metadata/type' }
+							}">
+							<core:Item  key="{__metadata/type}" text="{__metadata/type}"  />
+						</MultiComboBox>
+					</f:SimpleForm>
+				</l:BlockLayoutCell>
+				</l:BlockLayoutRow>
+			</l:BlockLayout>
+			</content>
+			<Bar>
 				<contentRight>
 					<Button id="edit" text="Edit" enabled="false" press="handleEditPress" />
 					<Button id="save" text="Save" type="Emphasized" visible="false" press="handleSavePress" />
 					<Button id="cancel" text="Cancel" visible="false" press="handleCancelPress" />
 				</contentRight>
-	</Bar>
-	</Page>
+			</Bar>
+		</Page>	
 </mvc:View>

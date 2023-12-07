@@ -22,23 +22,13 @@ sap.ui.define([
 		
 		this.getView().bindElement("/results/0");
 		this._formFragments = {};
-
-		// var oInputControl = this.getView().byId('productInputWithList2');
-		// if (oInputControl) {
-		// 	var sInstructionShort = oInputControl.getValue();
-		// 	console.log('--:', oInputControl.getValue());
-		// } else {
-		// 	console.error("Control with ID 'productInputWithList2' not found.");
-		// }
 	   },
 
 handleEditPress: function () {
     var oInputControl = this.getView().byId('productInputWithList2');
 	var comboBoxControl = this.getView().byId('combobox');
 
-	this._oSupplier = Object.assign({}, this.getView().getModel().getData().results[0]);
-
-    if (oInputControl) {
+    if (oInputControl && comboBoxControl) {
         oInputControl.setEditable(true);
 		comboBoxControl.setEditable(true);
     } else {
@@ -84,7 +74,6 @@ _toggleButtonsAndView : function (bEdit) {
 	oView.byId("save").setVisible(bEdit);
 	oView.byId("cancel").setVisible(bEdit);
 
-	// this._showFormFragment("Display");
 },
 
 _getFormFragment: function (sFragmentName) {
@@ -100,16 +89,6 @@ _getFormFragment: function (sFragmentName) {
 	}
 
 	return pFormFragment;
-},
-
-_showFormFragment : function (sFragmentName) {
-	var oPage = this.byId("page");
-// console.log('_showFormFragment__')
-	// oPage.removeAllContent();
-	// console.log('====',sFragmentName)
-	// this._getFormFragment(sFragmentName).then(function(oVBox){
-	// 	oPage.insertContent(oVBox);
-	// });
 },
 
 
@@ -148,23 +127,15 @@ _showFormFragment : function (sFragmentName) {
 		var that = this;
 		var instructionLongPlaceholder = '{INSTRUCTION_LONG_PLACEHOLDER}';
 		
-		console.log('__',instructionLongPlaceholder)
 		var	sHtmlValue = `<p>${instructionLongPlaceholder}!!!!</p>`;
 		sap.ui.require(["sap/ui/richtexteditor/RichTextEditor", "sap/ui/richtexteditor/library"],
 			function (RTE, library) {
 				var EditorType = library.EditorType;
-				var oText = new sap.m.Text({
-					text: "Instruction long: "
-				});
-				var oVerticalLayout = new sap.ui.layout.VerticalLayout({
-					content: [oText]
-				});
-				that.getView().byId("idVerticalLayout").addContent(oVerticalLayout);
 
 				that.oRichTextEditor = new RTE("myRTE", {
 					editorType: bIsTinyMCE5 ? EditorType.TinyMCE5 : EditorType.TinyMCE6,
-					width: "50%",
-					height: "300px",
+					width: "100%",
+					height: "400px",
 					customToolbar: true,
 					showGroupFont: true,
 					showGroupLink: true,

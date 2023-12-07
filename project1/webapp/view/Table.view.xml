@@ -5,12 +5,12 @@
 	xmlns="sap.m"
 	xmlns:semantic="sap.f.semantic">
 		<semantic:SemanticPage
-		id="page"
-		headerPinnable="false"
-		toggleHeaderOnTitleClick="false">
-			<semantic:titleHeading>
-			<Title text="{i18n>worklistTitle}" />
-		</semantic:titleHeading>
+			id="page"
+			headerPinnable="false"
+			toggleHeaderOnTitleClick="false">
+				<semantic:titleHeading>
+					<Title text="{i18n>worklistTitle}" />
+				</semantic:titleHeading>
 		<semantic:content>
 	<Table
 	    id="friendsTable"
