@@ -18,16 +18,17 @@ sap.ui.define([
         this._oVSD = null;
         this._sSortField = null;
         this._bSortDescending = false;
+        sap.ui.require(["project1/service/TableService"], function (TableService) {
+            TableService.setTable(this._oTable);
+        }.bind(this));
+
         this._aValidSortFields = ["InstructionId", "InstructionShort", "ChUser"];
-       
         var oModel = new JSONModel("./localService/mockdata/Instructions.json");
         this.getView().setModel(oModel, "results");
-
         var oModel_2 = new JSONModel("./localService/mockdata/SubprojectTypes.json");
         this.getView().setModel(oModel_2, "comboBox");
 
         this.getRouter().getRoute("table").attachPatternMatched(this.onObjectMatched, this);
-
         this._initViewSettingsDialog();
 
         this._oTable.getBinding("items").attachChange(this._onTableChange, this);
@@ -38,7 +39,6 @@ sap.ui.define([
     var oTable = this.byId("friendsTable");
     var oBinding = oTable.getBinding("items");
     var iItemCount = oBinding.getLength();
-
     var oModel = this.getView().getModel("results");
     oModel.setProperty("/itemCount", iItemCount);
     },

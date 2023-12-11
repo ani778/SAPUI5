@@ -8,6 +8,7 @@ sap.ui.define([
 	return Controller.extend("project1.controller.RichTextEditorRemoveButtons", {
 		
 	   onInit: function () {
+	
 		const oRouter = this.getOwnerComponent().getRouter();
 		oRouter.getRoute("detail").attachPatternMatched(this.onObjectMatched, this);
 		this.initRichTextEditor(true);
@@ -24,10 +25,10 @@ sap.ui.define([
 		this._formFragments = {};
 	   },
 
-handleEditPress: function () {
+handleEditPress:  function () {
     var oInputControl = this.getView().byId('productInputWithList2');
+	
 	var comboBoxControl = this.getView().byId('combobox');
-
     if (oInputControl && comboBoxControl) {
         oInputControl.setEditable(true);
 		comboBoxControl.setEditable(true);
@@ -52,16 +53,38 @@ handleCancelPress : function () {
     this._toggleButtonsAndView(false);
 },
 
-handleSavePress : function () {
-	var oInputControl = this.getView().byId('productInputWithList2');
-	var comboBoxControl = this.getView().byId('combobox');
+handleSavePress : async function () {
+	const oTablePromise = new Promise((resolve, reject) => {
+		sap.ui.require(["project1/service/TableService"], function (TableService) {
+			const oTable = TableService.getTable();
+			var oBinding = oTable.getBinding("items");
+			if (oBinding) {
+				resolve(oBinding);
+			} else {
+				reject(new Error("Table not available"));
+			}
+		});
+	});
 
-    if (oInputControl) {
-        oInputControl.setEditable(false);
-		comboBoxControl.setEditable(false);
-    } else {
-        console.error("Control with ID 'productInputWithList' not found.");
-    }
+	const oTable = await oTablePromise;
+	var oInputControl = this.getView().byId('productInputWithList2');
+	var oInputControl_2 = this.getView().byId('productInputWithList');
+	var comboBoxControl = this.getView().byId('combobox');
+	const inputValue = oInputControl.getValue();
+
+	oTable.oList.some(obj => {
+		if(obj.InstructionId === oInputControl_2._lastValue) {
+			obj.InstructionShort = inputValue;
+            return true;
+		}
+	});
+	
+	if (oInputControl) {
+			oInputControl.setEditable(false);
+			comboBoxControl.setEditable(false);
+		} else {
+			console.error("Control with ID 'productInputWithList' not found.");
+		}
 	this._toggleButtonsAndView(false);
 
 },
@@ -69,7 +92,6 @@ handleSavePress : function () {
 _toggleButtonsAndView : function (bEdit) {
 	var oView = this.getView();
 
-	// Show the appropriate action buttons
 	oView.byId("edit").setVisible(!bEdit);
 	oView.byId("save").setVisible(bEdit);
 	oView.byId("cancel").setVisible(bEdit);
